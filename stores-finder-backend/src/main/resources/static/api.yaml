@@ -1,0 +1,216 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: jumbo stores finder service
+  license:
+    name: APL2
+basePath: /api
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /stores/{storeId}:
+    get:
+      tags:
+        - Stores Finder
+      summary: Find store by ID
+      operationId: store::retrieve
+      produces:
+        - application/json
+      description: returns a single storeDoc given a store id (sapStoreID)
+      parameters:
+        - name: storeId
+          in: path
+          description: ID of store to return
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/StoreDoc'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Store not found
+  /stores/:
+    post:
+      tags:
+        - Stores Finder
+      summary: Save or update store
+      operationId: store::persist
+      description: add or update store, using the store id (sapStoreID) as reference for update
+      parameters:
+        - name: store
+          description: store information to be persisted, in the original format
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Store'
+      responses:
+        '200':
+          description: Echo the request inputs
+  /stores/nearby/{longitude}/{latitude}:
+    get:
+      tags:
+        - Stores Finder
+      summary: Search nearby stores
+      operationId: store::retrieve
+      produces:
+        - application/json
+      description: returns nearby (configurable) stores given a latitude/longitude
+      parameters:
+        - name: longitude
+          in: path
+          description: longitude of the center point
+          required: true
+          type: number
+        - name: latitude
+          in: path
+          description: latitude of the center point
+          required: true
+          type: number
+        - name: radius
+          in: query
+          description: searchable circular area length (in km), defau
+          required: false
+          type: integer
+          default: 10
+        - name: limit
+          in: query
+          description: number of stores returned by the search
+          required: false
+          default: 5
+          type: number
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            $ref: '#/definitions/StoreDoc'
+        '400':
+          description: Invalid ID supplied
+definitions:
+  Store:
+    required:
+      - sapStoreID
+      - addressName
+      - longitude
+      - latitude
+      - locationType
+      - postalCode
+      - street
+      - street2
+      - city
+      - collectionPoint
+      - todayClose
+      - todayOpen
+    properties:
+      uuid:
+        type: string
+      sapStoreID:
+        type: string
+      addressName:
+        type: string
+      complexNumber:
+        type: string
+      longitude:
+        type: string
+      latitude:
+        type: string
+      locationType:
+        type: string
+      postalCode:
+        type: string
+      street:
+        type: string
+      street2:
+        type: string
+      street3:
+        type: string
+      city:
+        type: string
+      collectionPoint:
+        type: boolean
+      todayClose:
+        type: string
+      todayOpen:
+        type: string
+      showWarningMessage:
+        type: boolean
+    example:
+      uuid: gi8KYx4XGtUAAAFIQlIYwKxK
+      sapStoreID: 4817
+      addressName: "Jumbo Almere Waterwijk Geinplein"
+      complexNumber: 32004
+      longitude: 5.224110
+      latitude: 52.384906
+      locationType: SupermarktPuP
+      postalCode: "1316 HC"
+      street: Geinplein
+      street2: "32-37"
+      street3: ""
+      city: Almere
+      collectionPoint: true
+      todayOpen: "08:00"
+      todayClose: "22:00"
+      showWarningMessage: true
+  StoreDoc:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      address:
+        $ref: '#/definitions/Address'
+      location:
+        $ref: '#/definitions/Location'
+      locationType:
+        type: string
+      opensAt:
+        type: string
+      closesAt:
+        type: string
+      isCollectionPoint:
+        type: string
+    example:
+      id: 4817
+      name: "Jumbo Almere Waterwijk Geinplein"
+      address:
+        street: Geinplein
+        number: "32-37"
+        optional: ""
+        postalCode: "1316 HC"
+        city: Almere
+      location:
+        x: 5.224110
+        y: 52.384906
+      locationType: SupermarktPuP
+      opensAt: "08:00"
+      closesAt: "22:00"
+      isCollectionPoint: true
+  Address:
+    type: object
+    properties:
+      street:
+        type: string
+      number:
+        type: string
+      optional:
+        type: string
+      postalCode:
+        type: string
+      city:
+        type: string
+  Location:
+    type: object
+    properties:
+      x:
+        type: number
+      y:
+        type: number
