@@ -41,7 +41,7 @@ openapi/swagger is served on [8080](http://localhost:8080/) on index page.
 ## individual deployment
 
 ### database (dir: root)
-> docker-compose docker/docker-compose-mongo-only.yml up
+> docker-compose -f docker/docker-compose-mongo-only.yml up
 
 ### backend (dir: stores-finder-backend)  
 **build:**
