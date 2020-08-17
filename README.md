@@ -45,10 +45,10 @@ openapi/swagger is served on [8080](http://localhost:8080/) on index page.
 
 ### backend (dir: stores-finder-backend)  
 **build:**
-> ./gradlew clean build
+> ./stores-finder-backend/gradlew clean build
 
 **start backend server:**
-> ./gradlew bootRun
+> ./stores-finder-backend/gradlew bootRun
 
 
 ### frontend  (dir: stores-finder-frontend) 
