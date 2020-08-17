@@ -62,4 +62,4 @@ openapi/swagger is served on [8080](http://localhost:8080/) on index page.
 > npm run build
 
 **start the server:**
-> npm serve --port 4000
+> npm run-script serve --port=4000
