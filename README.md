@@ -59,7 +59,7 @@ openapi/swagger is served on [8080](http://localhost:8080/) on index page.
 > npm install (execute this command with "sudo" when ran into Linux, to avoid possible "Permission Denied" issues)
 
 **build/compiles:**
-> npm build
+> npm run build
 
 **start the server:**
 > npm serve --port 4000
