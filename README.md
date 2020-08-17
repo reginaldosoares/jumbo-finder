@@ -40,7 +40,7 @@ openapi/swagger is served on [8080](http://localhost:8080/) on index page.
 
 ## individual deployment
 
-## The following commands need to be ran inside the folders specified at the subtitles in the "dir" propertie values
+## the following commands need to be ran inside the folders specified at the subtitles in the "dir" propertie values
 
 ### database (dir: root)
 > docker-compose -f docker/docker-compose-mongo-only.yml up
