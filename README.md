@@ -40,8 +40,10 @@ openapi/swagger is served on [8080](http://localhost:8080/) on index page.
 
 ## individual deployment
 
+## the following commands need to be ran inside the folders specified at the subtitles in the "dir" propertie values
+
 ### database (dir: root)
-> docker-compose docker/docker-compose-mongo-only.yml up
+> docker-compose -f docker/docker-compose-mongo-only.yml up
 
 ### backend (dir: stores-finder-backend)  
 **build:**
@@ -54,10 +56,10 @@ openapi/swagger is served on [8080](http://localhost:8080/) on index page.
 ### frontend  (dir: stores-finder-frontend) 
 
 **project setup:**
-> npm install
+> npm install (execute this command with "sudo" when ran into Linux, to avoid possible "Permission Denied" issues)
 
 **build/compiles:**
-> npm build
+> npm run build
 
 **start the server:**
-> npm serve --port 4000
+> npm run-script serve --port=4000
